@@ -1,6 +1,6 @@
 {% set python_min = python_min|default("3.9") %}
 {% set name = "petsird" %}
-{% set version = "0.8.1" %}
+{% set version = "0.9.0" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 68fe1a506e2ae7176a3e231052f3ee172cc555477a4fe09d3cb32ad3ffed4e61
+  sha256: c8df128c828e6d5424a2e6e252bbe6532e752931e51373063eeb86390c1d556b
 
 build:
   noarch: python
