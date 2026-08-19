@@ -21,6 +21,8 @@ outputs:
         sha256: cc63f8d3605b44668567ecdee2c355ac78c8e1ba4f55ba31d54215a82812e282
     build:
       noarch: python
+      skip:
+        - not linux
       script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
     requirements:
       host:
