@@ -3,37 +3,66 @@ schema_version: 1
 context:
   version: "0.10.0"
 
-package:
+recipe:
   name: petsird
   version: ${{ version }}
 
-source:
-  url: https://pypi.org/packages/source/p/petsird/petsird-${{ version }}.tar.gz
-  sha256: cc63f8d3605b44668567ecdee2c355ac78c8e1ba4f55ba31d54215a82812e282
-
 build:
-  number: 0
-  noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 1
+  skip:
+    - win
+    - osx and not arm64
 
-requirements:
-  host:
-    - python ${{ python_min }}.*
-    - setuptools >=42
-    - setuptools-scm >=3.4
-    - pip
-  run:
-    - python >=${{ python_min }}
-    - numpy >=1.22
-
-tests:
-  - python:
-      imports:
-        - petsird
-      pip_check: true
-      python_version:
-        - ${{ python_min }}.*
-        - "*"
+outputs:
+  - package:
+      name: petsird
+    source:
+      - url: https://pypi.org/packages/source/p/petsird/petsird-${{ version }}.tar.gz
+        sha256: cc63f8d3605b44668567ecdee2c355ac78c8e1ba4f55ba31d54215a82812e282
+    build:
+      noarch: python
+      script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    requirements:
+      host:
+        - python ${{ python_min }}.*
+        - setuptools >=42
+        - setuptools-scm >=3.4
+        - pip
+      run:
+        - python >=${{ python_min }}
+        - numpy >=1.22
+    tests:
+      - python:
+          imports:
+            - petsird
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - "*"
+  - package:
+      name: petsird-headers
+    source:
+      - url: https://github.com/ETSInitiative/PETSIRD/releases/download/v${{ version }}/petsird_v${{ version }}_linux_x86_64.tar.gz
+        sha256: 3edc9333cbe3b801c1581df1d31ce8f57d04b1ef82367197bdfadb4e8e88f278
+    build:
+      noarch: generic
+      script: cp -r --parents include lib/cmake $PREFIX
+      files:
+        - include/*
+        - lib/*
+    tests:
+      - package_contents:
+          include:
+            - petsird_helpers.h
+            - petsird/types.h
+            - petsird/protocols.h
+            # self-distributed yardl (i.e. under petsird/) since there is no yardl-headers conda package (yet) to pin to instead
+            - petsird/yardl/yardl.h
+          files:
+            - lib/cmake/PETSIRD-*/PETSIRDConfig.cmake
+            - lib/cmake/PETSIRD-*/PETSIRDConfigVersion.cmake
+      - script:
+          - test ! -e lib/*.* # libpetsird.a etc should not be present
 
 about:
   summary: Library and tools for working with Positron Emission Tomography Standardization Initiative Raw Data (PETSIRD)
