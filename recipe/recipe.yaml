@@ -40,13 +40,18 @@ outputs:
             - ${{ python_min }}.*
             - "*"
   - package:
-      name: petsird-headers
+      name: libpetsird
     source:
-      - url: https://github.com/ETSInitiative/PETSIRD/releases/download/v${{ version }}/petsird_v${{ version }}_linux_x86_64.tar.gz
-        sha256: 3edc9333cbe3b801c1581df1d31ce8f57d04b1ef82367197bdfadb4e8e88f278
+      - if: target_platform == "linux-64"
+        then:
+          url: https://github.com/ETSInitiative/PETSIRD/releases/download/v${{ version }}/petsird_v${{ version }}_linux_x86_64.tar.gz
+          sha256: 3edc9333cbe3b801c1581df1d31ce8f57d04b1ef82367197bdfadb4e8e88f278
+      - if: target_platform == "osx-arm64"
+        then:
+          url: https://github.com/ETSInitiative/PETSIRD/releases/download/v${{ version }}/petsird_v${{ version }}_darwin_arm64.tar.gz
+          sha256: ca84943e71184e9a8253faac269c7dee1257896b233889752ea10c785a509284
     build:
-      noarch: generic
-      script: cp -r --parents include lib/cmake $PREFIX
+      script: cp -R include lib $PREFIX
       files:
         - include/*
         - lib/*
@@ -61,8 +66,7 @@ outputs:
           files:
             - lib/cmake/PETSIRD-*/PETSIRDConfig.cmake
             - lib/cmake/PETSIRD-*/PETSIRDConfigVersion.cmake
-      - script:
-          - test ! -e lib/*.* # libpetsird.a etc should not be present
+            - lib/*petsird.* # libpetsird.a or equivalent should be present
 
 about:
   summary: Library and tools for working with Positron Emission Tomography Standardization Initiative Raw Data (PETSIRD)
