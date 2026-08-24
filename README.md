@@ -1,7 +1,7 @@
-About petsird-feedstock
-=======================
+About libpetsird-feedstock
+==========================
 
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/petsird-feedstock/blob/main/LICENSE.txt)
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/feedstock-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/ETSInitiative/PETSIRD
 
@@ -14,11 +14,29 @@ Current build status
 
 
 <table><tr>
-    <td>All platforms:</td>
+    <td>GitHub Actions</td>
     <td>
-      <a href="https://github.com/conda-forge/petsird-feedstock/actions/workflows/conda-build.yml">
-        <img src="https://github.com/conda-forge/petsird-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
+      <a href="https://github.com/conda-forge/feedstock-feedstock/actions/workflows/conda-build.yml">
+        <img src="https://github.com/conda-forge/feedstock-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
       </a>
+    </td>
+  </tr>
+    
+  <tr>
+    <td>Azure</td>
+    <td>
+      <details>
+        <summary>
+          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/feedstock-feedstock?branchName=main">
+          </a>
+        </summary>
+        <table>
+          <thead><tr><th>Variant</th><th>Status</th></tr></thead>
+          <tbody>
+          </tbody>
+        </table>
+      </details>
     </td>
   </tr>
 </table>
@@ -28,12 +46,13 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libpetsird-green.svg)](https://anaconda.org/conda-forge/libpetsird) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libpetsird.svg)](https://anaconda.org/conda-forge/libpetsird) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libpetsird.svg)](https://anaconda.org/conda-forge/libpetsird) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libpetsird.svg)](https://anaconda.org/conda-forge/libpetsird) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-petsird-green.svg)](https://anaconda.org/conda-forge/petsird) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/petsird.svg)](https://anaconda.org/conda-forge/petsird) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/petsird.svg)](https://anaconda.org/conda-forge/petsird) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/petsird.svg)](https://anaconda.org/conda-forge/petsird) |
 
-Installing petsird
-==================
+Installing libpetsird
+=====================
 
-Installing `petsird` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `libpetsird` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
@@ -47,7 +66,7 @@ How to use
 <summary>With conda</summary>
 
 ```
-conda install petsird
+conda install libpetsird petsird
 ```
 
 </details>
@@ -56,7 +75,7 @@ conda install petsird
 <summary>With mamba</summary>
 
 ```
-mamba install petsird
+mamba install libpetsird petsird
 ```
 
 </details>
@@ -66,9 +85,9 @@ mamba install petsird
 
 ```
 # for adding to your local project
-pixi add petsird
+pixi add libpetsird petsird
 # for installing globally
-pixi global install petsird
+pixi global install libpetsird petsird
 ```
 
 </details>
@@ -76,13 +95,13 @@ pixi global install petsird
 Search package versions
 -----------------------
 
-It is possible to list all of the versions of `petsird` available on your platform:
+It is possible to list all of the versions of `libpetsird` available on your platform:
 
 <details>
 <summary>With conda</summary>
 
 ```
-conda search petsird --channel conda-forge
+conda search libpetsird --channel conda-forge
 ```
 
 </details>
@@ -91,7 +110,7 @@ conda search petsird --channel conda-forge
 <summary>With mamba</summary>
 
 ```
-mamba search petsird --channel conda-forge
+mamba search libpetsird --channel conda-forge
 ```
 
 </details>
@@ -100,7 +119,7 @@ mamba search petsird --channel conda-forge
 <summary>With pixi</summary>
 
 ```
-pixi search petsird --channel conda-forge
+pixi search libpetsird --channel conda-forge
 ```
 
 </details>
@@ -110,13 +129,13 @@ pixi search petsird --channel conda-forge
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search petsird --channel conda-forge
+mamba repoquery search libpetsird --channel conda-forge
 
-# List packages depending on `petsird`:
-mamba repoquery whoneeds petsird --channel conda-forge
+# List packages depending on `libpetsird`:
+mamba repoquery whoneeds libpetsird --channel conda-forge
 
-# List dependencies of `petsird`:
-mamba repoquery depends petsird --channel conda-forge
+# List dependencies of `libpetsird`:
+mamba repoquery depends libpetsird --channel conda-forge
 ```
 
 </details>
@@ -163,17 +182,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating petsird-feedstock
-==========================
+Updating libpetsird-feedstock
+=============================
 
-If you would like to improve the petsird recipe or build a new
+If you would like to improve the libpetsird recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/petsird-feedstock are
+Note that all branches in the conda-forge/libpetsird-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks, and branches in the main repository should only be used to
 build distinct package versions.
