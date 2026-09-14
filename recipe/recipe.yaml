@@ -8,7 +8,7 @@ recipe:
   version: ${{ version }}
 
 build:
-  number: 1
+  number: 2
   skip:
     - win
     - osx and not arm64
@@ -57,6 +57,13 @@ outputs:
       files:
         - include/*
         - lib/*
+    requirements:
+      run:
+        - hdf5>=1.12.1
+        - howardhinnant_date>=3.0.1
+        - nlohmann_json>=3.11.2
+        - xtensor>=0.24.2
+        - xtensor-blas
     tests:
       - package_contents:
           include:
