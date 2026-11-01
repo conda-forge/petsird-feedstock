@@ -68,8 +68,6 @@ outputs:
         - xtensor>=0.24.2
         - xtensor-blas
       run:
-        - hdf5>=1.12.1
-        - howardhinnant_date>=3.0.1
         - nlohmann_json>=3.11.2
         - xtensor>=0.24.2
         - xtensor-blas
@@ -89,7 +87,7 @@ outputs:
 about:
   summary: Library and tools for working with Positron Emission Tomography Standardization Initiative Raw Data (PETSIRD)
   license: Apache-2.0
-  license_file: LICENSE
+  license_file: LICENSE.txt
   homepage: https://github.com/ETSInitiative/PETSIRD
 
 extra:
