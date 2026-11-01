@@ -55,7 +55,7 @@ outputs:
         - cd model && ../yardl/yardl generate && cd ..
         - cmake -GNinja -S cpp -B cpp/build -DCMAKE_INSTALL_PREFIX:PATH="${PREFIX}"
         - ninja -C cpp/build install
-        # Need to have the same name as in PyPI for the `about: license_file` to work 
+        # Need to have the same name as in PyPI for the `about: license_file` to work
         - mv LICENSE.txt LICENSE
     requirements:
       build:
