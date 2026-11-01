@@ -55,6 +55,8 @@ outputs:
         - cd model && ../yardl/yardl generate && cd ..
         - cmake -GNinja -S cpp -B cpp/build -DCMAKE_INSTALL_PREFIX:PATH="${PREFIX}"
         - ninja -C cpp/build install
+        # Need to have the same name as in PyPI for the `about: license_file` to work 
+        - mv LICENSE.txt LICENSE
     requirements:
       build:
         - cmake
@@ -87,7 +89,7 @@ outputs:
 about:
   summary: Library and tools for working with Positron Emission Tomography Standardization Initiative Raw Data (PETSIRD)
   license: Apache-2.0
-  license_file: LICENSE.txt
+  license_file: LICENSE
   homepage: https://github.com/ETSInitiative/PETSIRD
 
 extra:
