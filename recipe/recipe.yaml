@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "0.12.0"
+  version: "0.12.2"
 
 recipe:
   name: petsird
@@ -18,7 +18,7 @@ outputs:
       name: petsird
     source:
       - url: https://pypi.org/packages/source/p/petsird/petsird-${{ version }}.tar.gz
-        sha256: e9a3efacd9b3c3d28b2f2885fe51c55d8a9f9a97a52a4164ae05f74a334609e0
+        sha256: 39c48520769928f43589f8e507841d8c96b07bc2e874a9bf3615c9c13eceb12b
     build:
       noarch: python
       skip:
@@ -44,20 +44,29 @@ outputs:
   - package:
       name: libpetsird
     source:
-      - if: target_platform == "linux-64"
-        then:
-          url: https://github.com/ETSInitiative/PETSIRD/releases/download/v${{ version }}/petsird_v${{ version }}_linux_x86_64.tar.gz
-          sha256: b5d0b4a99a060fa3fe59a561abb720ee5c2ac504c2996c60ea0c330099b61eab
-      - if: target_platform == "osx-arm64"
-        then:
-          url: https://github.com/ETSInitiative/PETSIRD/releases/download/v${{ version }}/petsird_v${{ version }}_darwin_arm64.tar.gz
-          sha256: 3221c84a2dfc58bef6929f68d0baa4fb211ce36911c108257f2c761ce63c91a5
+      - url: https://github.com/ETSInitiative/PETSIRD/archive/refs/tags/v${{ version }}.tar.gz
+        sha256: c6b6a01fe7629721468b8831eaea13720f7d4421b148ee0fe8a1b44983ff4b55
     build:
-      script: cp -R include lib $PREFIX
-      files:
-        - include/*
-        - lib/*
+      script:
+        # can't currently use "just" as it doesn't allow setting CMAKE_PREFIX_PATH,
+        # which seems necessary for finding blas
+        - cd $SRC_DIR
+        - env DEST=yardl ./install_yardl.sh
+        - cd model && ../yardl/yardl generate && cd ..
+        - cmake -GNinja -S cpp -B cpp/build -DCMAKE_INSTALL_PREFIX:PATH="${PREFIX}"
+        - ninja -C cpp/build install
     requirements:
+      build:
+        - cmake
+        - ninja
+        - ${{ stdlib('c') }}
+        - ${{ compiler('cxx') }}
+      host:
+        - hdf5>=1.12.1
+        - howardhinnant_date>=3.0.1
+        - nlohmann_json>=3.11.2
+        - xtensor>=0.24.2
+        - xtensor-blas
       run:
         - hdf5>=1.12.1
         - howardhinnant_date>=3.0.1
