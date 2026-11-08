@@ -1,14 +1,14 @@
 schema_version: 1
 
 context:
-  version: "0.12.2"
+  version: "0.13.0"
 
 recipe:
   name: petsird
   version: ${{ version }}
 
 build:
-  number: 1
+  number: 0
   skip:
     - win
     - osx and not arm64
@@ -18,7 +18,7 @@ outputs:
       name: petsird
     source:
       - url: https://pypi.org/packages/source/p/petsird/petsird-${{ version }}.tar.gz
-        sha256: 39c48520769928f43589f8e507841d8c96b07bc2e874a9bf3615c9c13eceb12b
+        sha256: 11ab9921c7aaf222f816aacda5c1ec2de8c9fbe578175c4a0d0a13fe1d197fb4
     build:
       noarch: python
       skip:
@@ -45,7 +45,7 @@ outputs:
       name: libpetsird
     source:
       - url: https://github.com/ETSInitiative/PETSIRD/archive/refs/tags/v${{ version }}.tar.gz
-        sha256: c6b6a01fe7629721468b8831eaea13720f7d4421b148ee0fe8a1b44983ff4b55
+        sha256: 29b17679c9a83f7661bc4ca4b99dde921e04e2131527f046e0c764fa685944db
     build:
       script:
         # can't currently use "just" as it doesn't allow setting CMAKE_PREFIX_PATH,
